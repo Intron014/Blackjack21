@@ -7,9 +7,33 @@ typedef struct {
     int howmany;
 } hand;
 
+void autoFirstDeal(player *p, hand *h) {
+    int card;
+    int isWritten = 0;
+    do {
+        card = rand() % 52;
+        if (h[card].howmany) {
+            p->hand[0].value = h[card].value;
+            strcpy(p->hand[0].name, h[card].name);
+            h[card].howmany--;
+            isWritten = 1;
+        }
+    } while (!isWritten);
+    isWritten = 0;
+    do {
+        card = rand() % 52;
+        if (h[card].howmany) {
+            p->hand[1].value = h[card].value;
+            strcpy(p->hand[1].name, h[card].name);
+            h[card].howmany--;
+            isWritten = 1;
+        }
+    } while (!isWritten);
+}
+
 void handGenerator(hand *h) {
     for(int i=0 ; i<52 ; i++) {
-        h[i].value = i%13;
+        h[i].value = i%13 + 1;
         h[i].howmany = 4;
         if(i<13) {
             strcpy(h[i].name, "Hearts");
