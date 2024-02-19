@@ -7,6 +7,14 @@ typedef struct {
     int howmany;
 } hand;
 
+int handValue(player *p) {
+    int value = 0;
+    for(int i=0; i<10; i++) {
+        value += p->hand[i].value;
+    }
+    return value;
+}
+
 void autoFirstDeal(player *p, hand *h) {
     int card;
     int isWritten = 0;
