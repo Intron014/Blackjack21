@@ -14,6 +14,7 @@ typedef struct {
 void dealerHandReset(dealer *p) {
     for(int i = 0; i < 10; i++) {
         p->hand[i].value = 0;
+        p->hand[i].isHidden = 0;
         strcpy(p->hand[i].name, "");
     }
 }
@@ -42,6 +43,23 @@ void dealerFirstDeal(dealer *p, hand *h) {
             isWritten = 1;
         }
     } while (!isWritten);
+}
+
+int dealerHandValue(dealer *p) {
+    int value = 0;
+    for(int i=0; i<10; i++) {
+        if(p->hand[i].value > 10){
+            value += 10;
+        } else if(p->hand[i].value == 1) {
+            if(value+11 > 21)
+                value += 1;
+            else
+                value += 11;
+        } else {
+            value += p->hand[i].value;
+        }
+    }
+    return value;
 }
 
 void dealerCardPrinter(dealerHand *h, int size){
