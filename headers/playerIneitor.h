@@ -12,6 +12,7 @@ typedef struct {
     char name[50];
     int money;
     int bet;
+    int isAI;
     int status; //3: blackjack, 2: stand, 1: bust
     playerHand hand[10];
 } player;
