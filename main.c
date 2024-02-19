@@ -35,15 +35,36 @@ int main() {
         for (int i = 0; i < numPlay; i++) {
             playerHandReset(&gaymers[i]);
             int isAlive = 1;
-            autoFirstDeal(&gaymers[i], h);
-            for (int j = 2; isAlive ; j++) {
-                printf("Player %s's Turn\n", gaymers[i].name);
+            for (int j = 0; isAlive ; j++) {
+                if(j<1) {
+                    printf("Player %s's Turn\n", gaymers[i].name);
+                    autoFirstDeal(&gaymers[i], h);
+                    j=1;
+                } else {
+                    int card;
+                    int isWritten = 0;
+                    do {
+                        card = rand() % 52;
+                        if (h[card].howmany) {
+                            gaymers[i].hand[j].value = h[card].value;
+                            strcpy(gaymers[i].hand[j].name, h[card].name);
+                            h[card].howmany--;
+                            isWritten = 1;
+                        }
+                    } while (!isWritten);
+                }
                 printf("Your hand (%i): \n", handValue(&gaymers[i]));
-                cardPrinter(gaymers[i].hand, j);
-                printf("Do you want another card? (1-Yes, 0-No): ");
-                scanf("%i", &isAlive);
+                cardPrinter(gaymers[i].hand, j+1);
+                if(handValue(&gaymers[i])>21) {
+                    printf("You are busted!\n");
+                    isAlive = 0;
+                } else{
+                    printf("Do you want another card? (1-Yes, 0-No): ");
+                    scanf("%i", &isAlive);
+                }
             }
         }
+        // Bet payment handler here
     }
 
 }
