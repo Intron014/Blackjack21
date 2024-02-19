@@ -35,8 +35,11 @@ int main() {
     // Game
     while(game) {
         for (int i = 0; i < numPlay; i++) {
-            printf("Player %s's Turn\n> $%i\nEnter your bet: ", gaymers[i].name, gaymers[i].money);
-            scanf("%i", &gaymers[i].bet);
+            printf("Player %s's Turn\n", gaymers[i].name);
+            do {
+                printf("> $%i\nEnter your bet ($1 - $100): $", gaymers[i].money);
+                scanf("%i", &gaymers[i].bet);
+            } while(gaymers[i].bet<=0 || gaymers[i].bet>100);
         }
         dealerHandReset(&gayler);
         dealerFirstDeal(&gayler, h);
@@ -74,8 +77,15 @@ int main() {
                     gaymers[i].status = 1;
                     isAlive = 0;
                 } else{
-                    printf("Do you want another card? (1-Yes, 0-No): ");
-                    scanf("%i", &isAlive);
+                    if(!isAlive) {
+                        do {
+                            printf("Do you want another card? (0-No): ");
+                            scanf("%i", &isAlive);
+                        } while (isAlive);
+                    } else {
+                        printf("Do you want another card? (1-Yes, 0-No): ");
+                        scanf("%i", &isAlive);
+                    }
                     if(!isAlive) {
                         gaymers[i].status = 2;
                     }
