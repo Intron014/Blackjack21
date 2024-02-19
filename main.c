@@ -2,9 +2,9 @@
 #include <string.h>
 #include <stdlib.h>
 #include <time.h>
-#include "playerIneitor.h"
-#include "dealerIneitor.h"
-#include "cardIneitor.h"
+#include "headers/playerIneitor.h"
+#include "headers/dealerIneitor.h"
+#include "headers/cardIneitor.h"
 
 int main() {
     // Init
