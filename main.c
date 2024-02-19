@@ -82,10 +82,11 @@ int main() {
                 }
             }
         }
-        printf("Dealer's Turn (%i): \n", dealerHandValue(&gayler));
+        printf("Dealer's Turn: \n");
         gayler.hand[1].isHidden = 0;
         int isAlive = 1;
         for (int j = 2; isAlive ; j++) {
+            printf("(%i)\n", dealerHandValue(&gayler));
             dealerCardPrinter(gayler.hand, j);
             if(dealerHandValue(&gayler) <= 17) {
                 int card;
@@ -104,9 +105,27 @@ int main() {
             }
         }
         // Bet delivery system
+        for(int i=0; i<numPlay; i++) {
+            if(gaymers[i].status == 3) {
+                gaymers[i].money += gaymers[i].bet*3;
+            } else if(gaymers[i].status == 2) {
+                if(dealerHandValue(&gayler) > 21) {
+                    gaymers[i].money += gaymers[i].bet*2;
+                } else if(dealerHandValue(&gayler) > playerHandValue(&gaymers[i])) {
+                    gaymers[i].money -= gaymers[i].bet;
+                } else if(dealerHandValue(&gayler) < playerHandValue(&gaymers[i])) {
+                    gaymers[i].money += gaymers[i].bet*2;
+                }
+            } else if(gaymers[i].status == 1) {
+                gaymers[i].money -= gaymers[i].bet;
+            }
+        }
         game--;
     }
     // Results
+    for(int i=0; i<numPlay; i++) {
+        printf("Player %s: $%i\n", gaymers[i].name, gaymers[i].money);
+    }
 
 }
 
