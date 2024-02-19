@@ -77,6 +77,9 @@ int main() {
                     gaymers[i].status = 1;
                     isAlive = 0;
                 } else{
+                    if(playerHandValue(&gaymers[i])==21){
+                        isAlive = 0;
+                    }
                     if(!isAlive) {
                         do {
                             printf("Do you want another card? (0-No): ");
