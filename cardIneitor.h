@@ -5,7 +5,7 @@ typedef struct {
     int value;
     char name[9];
     int howmany;
-}hand;
+} hand;
 
 void handGenerator(hand *h) {
     for(int i=0 ; i<52 ; i++) {
