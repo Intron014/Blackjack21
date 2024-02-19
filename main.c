@@ -84,10 +84,10 @@ int main() {
         }
         printf("Dealer's Turn (%i): \n", dealerHandValue(&gayler));
         gayler.hand[1].isHidden = 0;
-        dealerCardPrinter(gayler.hand, 2);
         int isAlive = 1;
         for (int j = 2; isAlive ; j++) {
-            if(dealerHandValue(&gayler) < 17) {
+            dealerCardPrinter(gayler.hand, j);
+            if(dealerHandValue(&gayler) <= 17) {
                 int card;
                 int isWritten = 0;
                 do {
@@ -103,8 +103,10 @@ int main() {
                 isAlive = 0;
             }
         }
+        // Bet delivery system
         game--;
     }
+    // Results
 
 }
 
