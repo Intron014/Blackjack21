@@ -19,8 +19,8 @@ int main() {
         printf("How many rounds are going to be played? (1-10): ");
         scanf("%i", &game);
     }
-    while(numPlay<2 || numPlay>4) {
-        printf("How many players are going to play? (2-4): ");
+    while(numPlay<1 || numPlay>4) {
+        printf("How many players are going to play? (1-4): ");
         scanf("%i", &numPlay);
     }
     player gaymers[numPlay];

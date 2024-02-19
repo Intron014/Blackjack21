@@ -35,16 +35,23 @@ void playerHandReset(player *p) {
 
 int playerHandValue(player *p) {
     int value = 0;
+    int acesPos[10];
+    acesposReset(acesPos);
     for(int i=0; i<10; i++) {
         if(p->hand[i].value > 10){
             value += 10;
         } else if(p->hand[i].value == 1) {
+            acesPos[i] = 1;
+        } else {
+            value += p->hand[i].value;
+        }
+    }
+    for(int i=0; i<10; i++) {
+        if(acesPos[i]) {
             if(value+11 > 21)
                 value += 1;
             else
                 value += 11;
-        } else {
-            value += p->hand[i].value;
         }
     }
     return value;

@@ -7,6 +7,12 @@ typedef struct {
     int howmany;
 } hand;
 
+void acesposReset(int *acesPos) {
+    for(int i=0; i<10; i++) {
+        acesPos[i] = 0;
+    }
+}
+
 void handGenerator(hand *h) {
     for(int i=0 ; i<52 ; i++) {
         h[i].value = i%13 + 1;
