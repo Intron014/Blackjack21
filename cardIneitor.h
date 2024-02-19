@@ -10,7 +10,16 @@ typedef struct {
 int handValue(player *p) {
     int value = 0;
     for(int i=0; i<10; i++) {
-        value += p->hand[i].value;
+        if(p->hand[i].value > 10){
+            value += 10;
+        } else if(p->hand[i].value == 1) {
+            if(value+11 > 21)
+                value += 1;
+            else
+                value += 11;
+        } else {
+            value += p->hand[i].value;
+        }
     }
     return value;
 }
@@ -55,13 +64,17 @@ void handGenerator(hand *h) {
     }
 }
 
-void cardPrinter(hand *h, int size){
+void cardPrinter(playerHand *h, int size){
     for(int i=0; i<size; i++) {
         printf(" _______ ");
     }
     printf("\n");
     for(int i=0; i<size; i++) {
-        printf("|%i      |", h[i].value);
+        if(h[i].value<10) {
+            printf("|%i      |", h[i].value);
+        } else {
+            printf("|%i     |", h[i].value);
+        }
     }
     printf("\n");
     for(int i=0; i<size; i++) {
@@ -77,7 +90,11 @@ void cardPrinter(hand *h, int size){
     }
     printf("\n");
     for(int i=0; i<size; i++) {
-        printf("|______%i|", h[i].value);
+        if(h[i].value<10) {
+            printf("|______%i|", h[i].value);
+        } else {
+            printf("|_____%i|", h[i].value);
+        }
     }
     printf("\n");
 }
