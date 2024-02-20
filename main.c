@@ -11,7 +11,9 @@ int main() {
     srand(time(NULL));
     hand h[52];
     handGenerator(h);
-
+    gameSettings settings;
+    initSettings(&settings);
+    system("clear");
     // Players
     int numPlay = 0;
     int game = 0;
@@ -31,6 +33,32 @@ int main() {
         scanf("%s", name);
         playerGenerator(&gaymers[i], name);
     }
+    do {
+        do {
+            printf("1 - Enter the game\n2 - Access settings\n0 - Exit\n> ");
+            scanf("%i", &settings.ans);
+        } while (settings.ans < 0 || settings.ans > 2);
+        if (settings.ans == 2) {
+            printf("Blackjack Multiplier (*%i): ", settings.blackjackMultiplier);
+            scanf("%i", &settings.blackjackMultiplier);
+            printf("Win Multiplier (*%i): ", settings.winMultiplier);
+            scanf("%i", &settings.winMultiplier);
+        } else if (settings.ans == 1){
+            while (settings.game < 1 || settings.game > 10) {
+                printf("How many rounds are going to be played? (1-10): ");
+                scanf("%i", &settings.game);
+            }
+            while (settings.numPlay < 1 || settings.numPlay > 4) {
+                printf("How many players are going to play? (1-4): ");
+                scanf("%i", &settings.numPlay);
+            }
+            player gaymers[settings.numPlay];
+            dealer gayler;
+            for (int i = 0; i < settings.numPlay; i++) {
+                char name[50];
+                printf("Enter the name of player %i: ", i + 1);
+                scanf("%s", name);
+                playerGenerator(&gaymers[i], name);
 
     // Game
     while(game) {
@@ -141,4 +169,3 @@ int main() {
     }
 
 }
-

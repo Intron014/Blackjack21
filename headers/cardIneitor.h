@@ -7,6 +7,22 @@ typedef struct {
     int howmany;
 } hand;
 
+typedef struct {
+    int blackjackMultiplier;
+    int winMultiplier;
+    int numPlay;
+    int game;
+    int ans;
+} gameSettings;
+
+void initSettings(gameSettings *s) {
+    s->blackjackMultiplier = 3;
+    s->winMultiplier = 2;
+    s->numPlay = 0;
+    s->game = 0;
+    s->ans = 99;
+}
+
 void acesposReset(int *acesPos) {
     for(int i=0; i<10; i++) {
         acesPos[i] = 0;
