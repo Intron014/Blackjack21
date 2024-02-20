@@ -116,4 +116,16 @@ void playerCardPrinter(playerHand *h, int size){
     }
     printf("\n");
 }
+
+void resultsPrinter(player *p, int numPlayers){
+    printf("\n---------Results---------\n");
+    printf("| Player Name | Balance |\n");
+    printf("-------------------------\n");
+    for (int i = 0; i < numPlayers; i++) {
+        printf("| %-11s | $%-6i |\n", p[i].name, p[i].money);
+    }
+    printf("-------------------------\nPress any key to continue...\n");
+    fflush(stdin);
+    getchar();
+}
 #endif //BLACKJACK21_PLAYERINEITOR_H
