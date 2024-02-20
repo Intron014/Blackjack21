@@ -27,6 +27,8 @@ int main() {
             scanf("%i", &settings.blackjackMultiplier);
             printf("Win Multiplier (*%i): ", settings.winMultiplier);
             scanf("%i", &settings.winMultiplier);
+            printf("Explicit mode (%i): ", settings.explicitMode);
+            scanf("%i", &settings.explicitMode);
         } else if (settings.ans == 1){
             while (settings.game < 1 || settings.game > 10) {
                 printf("How many rounds are going to be played? (1-10): ");
@@ -85,7 +87,10 @@ int main() {
                             printf("Your hand (%i): \n", playerHandValue(&gaymers[i]));
                             playerCardPrinter(gaymers[i].hand, j + 1);
                             if (playerHandValue(&gaymers[i]) > 21) {
-                                printf("You are busted!\nPress any key to continue...\n");
+                                if(settings.explicitMode)
+                                    printf("You are FUCKED!\nPress any key to continue...\n");
+                                else
+                                    printf("You are busted!\nPress any key to continue...\n");
                                 fflush(stdin);
                                 getchar();
                                 gaymers[i].status = 1;
@@ -139,6 +144,5 @@ int main() {
                 resultsPrinter(gaymers, settings.numPlay);
             }
         }
-        system("clear");
     } while (settings.ans != 0);
 }

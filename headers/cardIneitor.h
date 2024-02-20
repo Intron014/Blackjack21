@@ -13,6 +13,7 @@ typedef struct {
     int numPlay;
     int game;
     int ans;
+    int explicitMode;
 } gameSettings;
 
 void initSettings(gameSettings *s) {
@@ -21,6 +22,7 @@ void initSettings(gameSettings *s) {
     s->numPlay = 0;
     s->game = 0;
     s->ans = 99;
+    s->explicitMode = 0;
 }
 
 void acesposReset(int *acesPos) {
